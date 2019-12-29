@@ -6,6 +6,7 @@ FROM continuumio/miniconda3:4.7.12
 # https://github.com/lz4/lz4
 # https://docs.anaconda.com/mkl-optimizations/
 
+
 RUN conda install --yes \
     -c conda-forge \
     python-blosc \
@@ -13,6 +14,7 @@ RUN conda install --yes \
     lz4 \
     nomkl \
     tini==0.18.0 \
+    jupyter \
     python=3.6.* \
     numpy=1.14.2 \
     pandas=0.22.* \
@@ -40,4 +42,5 @@ RUN mkdir /opt/app; \
 
 COPY src /opt/app/
 
-ENTRYPOINT ["tini", "-g", "--", "/usr/bin/prepare.sh"]
+CMD [ "/usr/bin/prepare.sh" ]
+ENTRYPOINT ["tini", "-g", "--"]
